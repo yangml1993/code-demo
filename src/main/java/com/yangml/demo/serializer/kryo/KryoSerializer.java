@@ -5,6 +5,7 @@ import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import com.google.common.collect.Lists;
 import com.yangml.demo.serializer.Serializer;
+import com.yangml.demo.serializer.pojo.DemoSchool;
 import com.yangml.demo.serializer.pojo.School;
 import com.yangml.demo.serializer.pojo.TestSchool;
 import com.yangml.demo.serializer.pojo.User;
@@ -39,14 +40,16 @@ public class KryoSerializer implements Serializer {
 
 
     public static void main(String[] args) {
-        School school = new TestSchool();
-        List<School> schoolList = Lists.newArrayList(school);
+        School testSchool = new TestSchool();
+        School demoSchool = new DemoSchool();
+        List<School> schoolList = Lists.newArrayList(testSchool,demoSchool);
         User user = User.builder().name("杨明亮").age(26).school(schoolList).build();
         KryoSerializer kryoSerializer = new KryoSerializer(User.class);
-        byte[] bytes = new byte[100];
+        byte[] bytes = new byte[200];
         kryoSerializer.serialize(user,bytes);
         User result = kryoSerializer.deserialize(bytes);
         System.out.println(result.toString());
         System.out.println(result.getSchool().get(0).getName());
+        System.out.println(result.getSchool().get(1).getName());
     }
 }

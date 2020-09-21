@@ -6,7 +6,8 @@ package com.yangml.demo.serializer.pojo;
  * @CopyRight : DataTeam @ SouChe Inc
  * @Desc :
  */
-public class TestSchool implements School{
+public class TestSchool extends AbstractSchool implements School{
+    @Override
     public String getName() {
         return "test";
     }
